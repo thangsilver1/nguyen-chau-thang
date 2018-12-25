@@ -1,0 +1,27 @@
+DE 2
+5
+cau 1: cau dung la?
+A. sai
+B. dung
+C. sai
+B
+cau 2: a = 100, b = 23, vay a + b = ?
+A. 111
+B. 124
+C. 123
+C
+cau 4: hinh vuong co may goc?
+A. 3
+B. 4
+C. 5
+B
+cau 5: a - a = ?
+A. 1
+B. 0
+C. 2
+B
+cau 3: mot tam giac co bao nhieu canh?
+A. 4
+B. 5
+C. 3
+C
