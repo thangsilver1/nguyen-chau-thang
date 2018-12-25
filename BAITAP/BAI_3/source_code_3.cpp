@@ -78,18 +78,31 @@ void MoDe(){
 	
 }
 
-// --- xem diem da luu trong LUU_DIEM.txt
 
+// --- xem diem da luu trong LUU_DIEM.txt ---
+void XemDiem(){
+	string s;
+	g.open("DIEM/LUU_DIEM.txt", ios::in);
+	cout << "diem nguoi choi da luu la:" << endl;
+	getline(g, s);
+	do{
+		cout << s << endl;
+		getline(g, s);
+	}while(s.compare("") != 0);
+	g.close();
+}
+
+// --- ham chon 1 trong cac bo de ---
 void ChonDe(){
 	int a;
 	
 	do{
-		cout << "nhap so 1, 2 hoac 3 chon bo de tuong ung!!!" << endl;
-		cout << "1. de 1" << endl << "2. de 2" << endl << "3. de 3" << endl;
+		cout << "nhap so 1, 2 hoac 3 chon bo de tuong ung / chon 4 de xem diem so da luu!!!" << endl;
+		cout << "1. de 1" << endl << "2. de 2" << endl << "3. de 3" << endl << "4. xem diem da luu" << endl;
 		cin >> a;
-		if(a < 1 || a > 3)
+		if(a < 1 || a > 4)
 			cout << "chon sai!!! vui long chon lai!!!";
-	}while(a < 1 || a > 3);
+	}while(a < 1 || a > 4);
 	
 	if(a == 1){
 		f.open("BO_DE/DE_1.txt", ios::in);
@@ -102,16 +115,18 @@ void ChonDe(){
 			MoDe();
 			f.close();
 		}
-		else{
-			f.open("BO_DE/DE_3.txt", ios::in);
-			MoDe();
-			f.close();
-		}
+		else
+			if(a == 3){
+				f.open("BO_DE/DE_3.txt", ios::in);
+				MoDe();
+				f.close();
+			}
+			else
+				XemDiem();
 }
+
 
 int main(){
 	
 	ChonDe();
-	
-	
 }
