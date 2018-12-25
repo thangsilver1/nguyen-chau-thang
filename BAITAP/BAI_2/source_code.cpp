@@ -127,7 +127,7 @@ int SoThuTu(NgayThang &a){
 }
 
 // --- so thu tu chuyen sang ngay
-void SoSangNgay(NgayThang &b, int n){
+void SoSangNgay(NgayThang &b, int &n){
 	for(int i = n; n > 0; n -= TinhNgay(b.M, b.Y))
 		if(n > TinhNgay(b.M, b.Y)){
 			b.M++;
@@ -142,7 +142,7 @@ void SoSangNgay(NgayThang &b, int n){
 				b.D = n;
 				n = 0;
 			}
-			
+	cout << "ngay sau khi cong la: " << b.D << "/" << b.M << "/" << b.Y << endl;	
 }
 
 // --- cong du lieu NgayThang voi so nguyen duong ---
@@ -158,22 +158,20 @@ void Cong(NgayThang a, int &x){
 	b.M = 1;
 	b.D = 0;
 	
-	if(n >= 366){
+	while(n > 365)
 		for(n; n >= 366; n-=366){
 			if(NamNhuan(b.Y) == false)
 				n++;
 			b.Y++; // xong nam
 		}
+	if(n == 365){
+		b.Y++; // xong nam
+		b.D = 1; // xong ngay
+		b.M = 1; // xong thang
 	}
 	else
-		if(n == 365){
-			b.Y++; // xong nam
-			b.D = 1; // xong ngay
-			b.M = 1; // xong thang
-		}
-		else
+		if(n < 365)
 			SoSangNgay(b, n); // xong ngay va thang
-	cout << "ngay sau khi cong la: " << b.D << "/" << b.M << "/" << b.Y << endl;
 }
 
 int main(){
