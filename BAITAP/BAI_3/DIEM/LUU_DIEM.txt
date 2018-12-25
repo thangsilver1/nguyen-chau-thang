@@ -1,2 +1,2 @@
-thang		10
-BIN		10
+thang		0
+BIN		0
