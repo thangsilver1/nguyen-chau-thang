@@ -126,7 +126,7 @@ int SoThuTu(NgayThang &a){
 
 }
 
-// --- so thu tu chuyen sang ngay
+// --- so thu tu chuyen sang ngay ---
 void SoSangNgay(NgayThang &b, int &n){
 	for(int i = n; n > 0; n -= TinhNgay(b.M, b.Y))
 		if(n > TinhNgay(b.M, b.Y)){
@@ -174,6 +174,48 @@ void Cong(NgayThang a, int &x){
 			SoSangNgay(b, n); // xong ngay va thang
 }
 
+// --- tru du lieu NgayThang voi so nguyen duong ---
+void Tru(NgayThang a, int &x){
+	
+	cout << "nhap so tu nhien duong: ";
+	cin >> x;
+	
+	NgayThang b;
+	b.Y = a.Y;
+	b.M = a.M;
+	b.D = a.D;
+	
+	while(x >= 365){
+		if(NamNhuan(b.Y) == false){
+			b.Y--;
+			x -= 365;
+		}
+		else{
+			b.Y--;
+			x -= 366;
+		}
+	}
+	
+	int stt = SoThuTu(b);
+	
+	b.M = 1;
+	b.D = 0;
+	
+	if(stt > x){
+		stt -= x;
+		SoSangNgay(b, stt);
+	}
+	else{
+		b.Y--;
+		if(NamNhuan(b.Y) == true)
+			stt += 366;
+		else
+			stt += 365;
+		stt -= x;
+		SoSangNgay(b, stt);
+	}
+}
+
 int main(){
 	
 	NgayThang DMY;
@@ -193,5 +235,9 @@ int main(){
 	int y;
 	
 	Cong(DMY, y);
+	
+	int z;
+	
+	Tru(DMY, z);
 
 }
