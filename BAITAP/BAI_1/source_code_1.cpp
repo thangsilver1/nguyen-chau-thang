@@ -39,6 +39,7 @@ void LietKe(){
 	ThongTin tt;
 	f.open("DU_LIEU/DANH_BA.txt", ios::in);
 	getline(f, s);
+	cout << "danh sach lien lac:" << endl;
 	do{
 		tt.Ten = s;
 		getline(f, tt.GioiTinh);
@@ -53,7 +54,106 @@ void LietKe(){
 
 // --- chinh sua bang ghi ---
 void ChinhSua(){
+	ThongTin tt;
+	string x;
+	string s;
+	fstream f;
+	fstream g;
+	fstream h;
+	f.open("DU_LIEU/DANH_BA.txt", ios::in);
+	g.open("DU_LIEU/DANH_BA_CHINH_SUA.txt", ios::out);
+	h.open("DU_LIEU/DU_LIEU_CHINH_SUA.txt", ios::in);
+	cout << "nhap ten lien lac ban muon chinh sua thong tin: ";
 	
+	getline(cin, x);
+	fflush(stdin);
+	getline(f, s);
+	do{
+		tt.Ten = s;
+		if(x.compare(tt.Ten) == 0){
+			for(int i = 1; i <= 4; i++)
+				getline(f, s);
+			fflush(stdin);
+			getline(h, s);
+			g << s << "\n";
+			fflush(stdin);
+			getline(h, s);
+			g << s << "\n";
+			fflush(stdin);
+			getline(h, s);
+			g << s << "\n";
+			fflush(stdin);
+			getline(h, s);
+			g << s << "\n";
+			fflush(stdin);
+			getline(h, s);
+			g << s << "\n";
+			fflush(stdin);	
+		}
+		else{
+			g << s << "\n";
+			fflush(stdin);
+			getline(f, s);
+			g << s << "\n";
+			fflush(stdin);
+			getline(f, s);
+			g << s << "\n";
+			fflush(stdin);
+			getline(f, s);
+			g << s << "\n";
+			fflush(stdin);
+			getline(f, s);
+			g << s << "\n";
+			fflush(stdin);
+		}
+		
+		getline(f, s);
+	}while(s.compare("") != 0);
+	cout << "chinh sua thanh cong!!!" << endl;
+	f.close();
+	g.close();
+	h.close();
+}
+
+// --- xoa bang tu file ---
+void Xoa(){
+	ThongTin tt;
+	string x;
+	string s;
+	fstream f;
+	fstream g;
+	f.open("DU_LIEU/DANH_BA.txt", ios::in);
+	g.open("DU_LIEU/DANH_BA_SAU_XOA.txt", ios::out);
+	cout << "nhap ten lien lac ban muon xoa thong tin: ";
+	getline(cin, x);
+	fflush(stdin);
+	getline(f, s);
+	do{
+		tt.Ten = s;
+		if(x.compare(tt.Ten) == 0)
+			for(int i = 1; i <= 5; i++)
+				getline(f, s);
+		else{
+			g << s << "\n";
+			fflush(stdin);
+			getline(f, s);
+			g << s << "\n";
+			fflush(stdin);
+			getline(f, s);
+			g << s << "\n";
+			fflush(stdin);
+			getline(f, s);
+			g << s << "\n";
+			fflush(stdin);
+			getline(f, s);
+			g << s << "\n";
+			fflush(stdin);
+		}
+		getline(f, s);
+	}while(s.compare("") != 0);
+	cout << "xoa thanh cong!!!" << endl;
+	f.close();
+	g.close();
 }
 
 // --- tin kiem theo ten ---
@@ -78,13 +178,17 @@ void TimKiem(){
 		getline(f, s);
 	}while(s.compare("") != 0);
 	f.close();
-	
 }
 int main(){
 	
-//	Them();
+	Them();
 
-//	LietKe();
+	LietKe();
 
 	TimKiem();
+
+	ChinhSua();
+
+	Xoa();
+
 }
