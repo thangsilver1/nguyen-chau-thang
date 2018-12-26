@@ -1,4 +1,15 @@
-a#1#0987654656#a@gmail.com#so 1, nguyen tat thanh, nha trang
-c#0#0987584626#c@gmail.com#so 3, nguyen dinh chieu, khanh hoa
-d#1#0981234567#d@gmail.com#01, nguyen van linh, khanh hoa
-
+ba
+nam
+0987654656
+a@gmail.com
+so 1, nguyen tat thanh, nha trang
+me
+nu
+0987584626
+c@gmail.com
+so 3, nguyen dinh chieu, khanh hoa
+boy
+nam
+0981234567
+d@gmail.com
+01, nguyen van linh, khanh hoa
