@@ -142,7 +142,7 @@ void SoSangNgay(NgayThang &b, int &n){
 				b.D = n;
 				n = 0;
 			}
-	cout << "ngay sau khi cong la: " << b.D << "/" << b.M << "/" << b.Y << endl;	
+	cout << "ngay sau khi cong la: " << b.D << "/" << b.M << "/" << b.Y << endl;
 }
 
 // --- cong du lieu NgayThang voi so nguyen duong ---
@@ -168,6 +168,7 @@ void Cong(NgayThang a, int &x){
 		b.Y++; // xong nam
 		b.D = 1; // xong ngay
 		b.M = 1; // xong thang
+		cout << "ngay sau khi cong la: " << b.D << "/" << b.M << "/" << b.Y << endl;
 	}
 	else
 		if(n < 365)
