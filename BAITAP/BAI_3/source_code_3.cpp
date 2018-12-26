@@ -19,7 +19,7 @@ struct DE{
 
 // --- ham kiem tra dap an dung va dap an nguoi thi ---
 bool KiemTraDA(string a, string b){
-	if(a.substr(0, 1).compare(b) == 0)
+	if(a.compare(b) == 0)
 		return true;
 	else
 		return false;
@@ -74,6 +74,7 @@ void MoDe(){
 			diem += 2;
 	}
 	cout << "da hoan thanh bai kiem tra!!!" << endl << endl;
+	cout << "diem so la:  " << diem << endl << endl;
 	LuuDiem(diem);
 	
 }
