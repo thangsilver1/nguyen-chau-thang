@@ -108,19 +108,19 @@ void ChonDe(){
 	
 	if(a == 1){
 		f.open("BO_DE/DE_1.txt", ios::in);
-		MoDe();
+		MoDe(); // --- mo de 1 ---
 		f.close();
 	}
 	else
 		if(a == 2){
 			f.open("BO_DE/DE_2.txt", ios::in);
-			MoDe();
+			MoDe(); // --- mo de 2 ---
 			f.close();
 		}
 		else
 			if(a == 3){
 				f.open("BO_DE/DE_3.txt", ios::in);
-				MoDe();
+				MoDe(); // --- mo de 3 ---
 				f.close();
 			}
 			else
