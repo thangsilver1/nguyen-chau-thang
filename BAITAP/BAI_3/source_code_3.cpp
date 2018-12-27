@@ -9,13 +9,14 @@ using namespace std;
 fstream f;
 fstream g;
 
-struct DE{
-	string CH;
-	string DAA;
-	string DAB;
-	string DAC;
-	string DA;
-};
+// --- khong su dung struct de quan ly cau hoi tao ra bo de , chi su dung file.txt ---
+//struct DE{
+//	string CH;
+//	string DAA;
+//	string DAB;
+//	string DAC;
+//	string DA;
+//};
 
 // --- ham kiem tra dap an dung va dap an nguoi thi ---
 bool KiemTraDA(string a, string b){
