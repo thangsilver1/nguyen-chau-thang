@@ -59,7 +59,7 @@ void Duyet(BienLuu bc[6], int &vt){
 }
 
 // --- truy vet ---
-void TruyVet(BienLuu a[6], int x, int y){
+void LoTrinh(BienLuu a[6], int x, int y){
 	cout << endl << "do dai duong di ngan nhat: " << a[y].tong << endl;
 	cout << "lo trinh:  " << y;
 	while(y != x){
@@ -114,7 +114,7 @@ void TimDuong(int a[6][6]){
 		i = x;
 	}while(x != y);
 	
-	TruyVet(BC, 0, 5);
+	LoTrinh(BC, 0, 5);
 }
 
 int main(){
