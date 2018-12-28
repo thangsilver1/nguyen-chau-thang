@@ -48,7 +48,6 @@ void SoSanh(BienLuu &bc, BienLuu &bp){
 void Duyet(BienLuu bc[6], int &vt){
 	int ln = 1000;
 	for(int i = 0; i < 6; i++){
-		cout << bc[i].co << "\t";
 		if(bc[i].co != 1 && bc[i].tong != 0){
 			if(bc[i].tong < ln){
 				vt = i;
@@ -56,8 +55,17 @@ void Duyet(BienLuu bc[6], int &vt){
 			}
 		}
 	}
-	bc[vt].co = 1;
-	cout << vt << endl;
+	bc[vt].co = 1; // --- tra ve vi tri hang cho lan duyet ma tran tiep theo ---
+}
+
+// --- truy vet ---
+void TruyVet(BienLuu a[6], int x, int y){
+	cout << endl << "do dai duong di ngan nhat: " << a[y].tong << endl;
+	cout << "lo trinh:  " << y;
+	while(y != x){
+		y = a[y].ten;
+		cout << " <-- " << y;
+	}
 }
 
 // --- ham tim duong di ngan nhat ---
@@ -77,7 +85,7 @@ void TimDuong(int a[6][6]){
 	
 	int x = 0;	// --- bi tri bat dau ---
 	int y = 5;	// --- vi tri ket thuc ---
-	int i = 0;	// --- bat dau doc ma tran tu hang 1 ---
+	int i = x;	// --- bat dau doc ma tran tu hang x / vi tri bat dau tim duong ---
 	
 	// --- danh dau vi tri bat dau ---
 	BC[x].co = 1;
@@ -86,9 +94,15 @@ void TimDuong(int a[6][6]){
 		
 		for(int j = 0; j < 6; j++){
 			// --- cho bien phu ten va gia tri tong ---
-			BP.ten = x;
-			BP.tong = a[i][j] + BC[x].tong;
 			
+			if(a[i][j] != 0){
+				BP.ten = x;
+				BP.tong = a[i][j] + BC[x].tong;
+			}
+			else{
+				BP.ten = 0;
+				BP.tong = 0;
+			}
 			SoSanh(BC[j], BP);
 		}
 	
@@ -99,8 +113,9 @@ void TimDuong(int a[6][6]){
 		Duyet(BC, x);
 		i = x;
 	}while(x != y);
+	
+	TruyVet(BC, 0, 5);
 }
-
 
 int main(){
 	int a[6][6];
