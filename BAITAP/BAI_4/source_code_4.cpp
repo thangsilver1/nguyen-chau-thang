@@ -28,7 +28,7 @@ void XuatMaTran(int a[6][6]){
 	}		
 }
 
-// --- ham so sanh 2 BienLuu ---
+// --- ham dieu kien gan gia tri bien phu cho bien chinh ---
 void SoSanh(BienLuu &bc, BienLuu &bp){
 	if(bc.co != 1){
 		if(bc.tong == 0){
@@ -58,7 +58,7 @@ void Duyet(BienLuu bc[6], int &vt){
 	bc[vt].co = 1; // --- tra ve vi tri hang cho lan duyet ma tran tiep theo ---
 }
 
-// --- truy vet ---
+// --- xuat ra lo trinh duong di ngan nhat tu mang BienLuu ---
 void LoTrinh(BienLuu a[6], int x, int y){
 	cout << endl << "do dai duong di ngan nhat: " << a[y].tong << endl;
 	cout << "lo trinh:  " << y;
@@ -93,25 +93,27 @@ void TimDuong(int a[6][6]){
 	do{
 		
 		for(int j = 0; j < 6; j++){
-			// --- cho bien phu ten va gia tri tong ---
 			
+			// --- gan cho bien phu ten va gia tri tong ---
 			if(a[i][j] != 0){
 				BP.ten = x;
 				BP.tong = a[i][j] + BC[x].tong;
 			}
+			// --- xu ly khi gia tri ma tran tai hang i cot j bang 0 ---
 			else{
 				BP.ten = 0;
 				BP.tong = 0;
 			}
 			SoSanh(BC[j], BP);
 		}
-	
+		
+		// --- xuat ra qua trinh thay doi gia tri cua mang BC[] theo dong ---
 		for(int c = 0; c < 6; c++)
 			cout << BC[c].ten << "," << BC[c].tong << "\t";
 		cout << endl;
-	
-		Duyet(BC, x);
-		i = x;
+		
+		Duyet(BC, x);	// --- danh dau vinh tri da di qua ---
+		i = x;	// --- dua i den hang tiep theo de doc ma tran ---
 	}while(x != y);
 	
 	LoTrinh(BC, 0, 5);
