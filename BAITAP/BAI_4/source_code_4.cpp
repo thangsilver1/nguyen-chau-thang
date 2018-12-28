@@ -36,7 +36,7 @@ void SoSanh(BienLuu &bc, BienLuu &bp){
 			bc.tong = bp.tong;
 		}
 		else{
-			if(bc.tong > bp.tong){
+			if(bp.tong != 0 && bc.tong > bp.tong){
 				bc.ten = bp.ten;
 				bc.tong = bp.tong;
 			}
