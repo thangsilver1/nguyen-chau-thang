@@ -29,10 +29,18 @@ void XuatMaTran(int a[6][6]){
 }
 
 // --- ham so sanh 2 BienLuu ---
-void SoSanh(BienLuu &bc, BienLuu bp){
-	if(bc.tong > bp.tong){
-		bc.ten = bp.ten;
-		bc.tong = bp.tong;
+void SoSanh(BienLuu &bc, BienLuu &bp){
+	if(bc.co != 1){
+		if(bc.tong == 0){
+			bc.ten = bp.ten;
+			bc.tong = bp.tong;
+		}
+		else{
+			if(bc.tong > bp.tong){
+				bc.ten = bp.ten;
+				bc.tong = bp.tong;
+			}
+		}
 	}
 }
 
@@ -40,7 +48,8 @@ void SoSanh(BienLuu &bc, BienLuu bp){
 void Duyet(BienLuu bc[6], int &vt){
 	int ln = 1000;
 	for(int i = 0; i < 6; i++){
-		if(bc[i].co == 0 && bc[i].tong != 0){
+		cout << bc[i].co << "\t";
+		if(bc[i].co != 1 && bc[i].tong != 0){
 			if(bc[i].tong < ln){
 				vt = i;
 				ln = bc[i].tong;
@@ -48,6 +57,7 @@ void Duyet(BienLuu bc[6], int &vt){
 		}
 	}
 	bc[vt].co = 1;
+	cout << vt << endl;
 }
 
 // --- ham tim duong di ngan nhat ---
@@ -59,41 +69,39 @@ void TimDuong(int a[6][6]){
 	BP.co = 0;
 	
 	// --- khoi tao hang dau tien ---
-	for(int l = 0; l < 6; l++){
-		BC[l].ten = 0;
-		BC[l].tong = 0;
-		BC[l].co = 0;
+	for(int i = 0; i < 6; i++){
+		BC[i].ten = 0;
+		BC[i].tong = 0;
+		BC[i].co = 0;
 	}
 	
 	int x = 0;	// --- bi tri bat dau ---
 	int y = 5;	// --- vi tri ket thuc ---
-	int i = 0;	// --- doc theo hang ---
+	int i = 0;	// --- bat dau doc ma tran tu hang 1 ---
+	
 	// --- danh dau vi tri bat dau ---
 	BC[x].co = 1;
 	
-	while(i < 6){
+	do{
+		
 		for(int j = 0; j < 6; j++){
 			// --- cho bien phu ten va gia tri tong ---
 			BP.ten = x;
 			BP.tong = a[i][j] + BC[x].tong;
 			
-			if(BC[j].co == 0){
-				if(BC[j].tong == 0){
-					BC[j].ten = BP.ten;
-					BC[j].tong = BP.tong;
-				}
-				else{
-					SoSanh(BC[j], BP);
-				}
-			}
+			SoSanh(BC[j], BP);
 		}
+	
+		for(int c = 0; c < 6; c++)
+			cout << BC[c].ten << "," << BC[c].tong << "\t";
+		cout << endl;
+	
 		Duyet(BC, x);
 		i = x;
-		cout << x << endl;
-	}
-	for(int c = 0; c < 6; c++)
-		cout << BC[c].ten << "," << BC[c].tong << "\t";
+	}while(x != y);
 }
+
+
 int main(){
 	int a[6][6];
 	
