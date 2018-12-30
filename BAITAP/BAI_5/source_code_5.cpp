@@ -17,6 +17,6 @@ int x;
 regs.h.ah=1;
 int86(0x21,&regs,&regs);
 x=regs.h.al;
-x -=0x30;
+x = x - 0x30;
 return x;
 }

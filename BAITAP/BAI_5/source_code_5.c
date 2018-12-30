@@ -13,6 +13,6 @@ int86(0x21,&regs,&regs) ;
 //Hàm trên mà th?c thi thì xu?t hi?n d?u nh?c cho ta nh?p 1 kı t?
 //---> T?ng giá tr? mình nh?p AL -> L?y ra
 x = regs.h.al ;//T?ng giá tr? mình nh?p vào AL
-x = x – 0x30;//L?y ra (:-)$
-return x
+x = x - 0x30;//L?y ra (:-)$
+return x;
 }
