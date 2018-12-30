@@ -1,17 +1,22 @@
-// code bai 5
-#include <stdio.h>
-#include <dos.h>
-#include <conio.h>
-int ltime = 0, ttime = 0, times[5];
-void interrupt(*dos_interrupt)();
-void interrupt lock_interrupt(){
-	ltime++;
-	ttime++;
-	(*dos_interrupt)();
+#include<stdio.h>
+#include<conio.h>
+#include<dos.h>
+int nhap();
+void main()
+{
+int x;
+printf ("\n Moi ban nhap mot so tu 0->9:");
+x=nhap();
+printf("\n So ban vua nhap la: %d",x);
+getch();
 }
-int main(){
-	char line[80];
-	int i, total, n = 5;
-	dos_interrupt = getvect(8);
-	disable();
+int nhap()
+{
+union REGS regs;
+int x;
+regs.h.ah=1;
+int86(0x21,&regs,&regs);
+x=regs.h.al;
+x -=0x30;
+return x;
 }
