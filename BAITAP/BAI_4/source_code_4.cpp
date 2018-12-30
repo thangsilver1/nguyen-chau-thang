@@ -1,7 +1,8 @@
 // code bai 4
 #include <iostream>
 #include <fstream>
-
+#include <stdlib.h>
+#define max 20
 using namespace std;
 
 struct BienLuu{
@@ -10,19 +11,22 @@ struct BienLuu{
 	int co;
 };
 // --- doc ma tran trong file ra mang 2 chieu ---
-void MoDoThi(int a[6][6]){
+void MoDoThi(int &n, int a[max][max]){
 	fstream f;
+	string s;
 	f.open("DU_LIEU/MA_TRAN.txt", ios::in);
-	for(int i = 0; i < 6; i++)
-		for(int j = 0; j < 6; j++)
+	getline(f, s);
+	n = atoi(s.c_str());
+	for(int i = 0; i < n; i++)
+		for(int j = 0; j < n; j++)
 			f >> a[i][j];
 	f.close();
 }
 
 // --- test du lieu mang 2 chieu ---
-void XuatMaTran(int a[6][6]){
-	for(int i = 0; i < 6; i++){
-		for(int j = 0; j < 6; j++)
+void XuatMaTran(int n, int a[max][max]){
+	for(int i = 0; i < n; i++){
+		for(int j = 0; j < n; j++)
 			cout << a[i][j] << " ";
 		cout << endl;
 	}		
@@ -45,9 +49,9 @@ void SoSanh(BienLuu &bc, BienLuu &bp){
 }
 
 // --- chon diem co tong nho nhat va bat co = 1 ---
-void Duyet(BienLuu bc[6], int &vt){
+void Duyet(int n, BienLuu bc[max], int &vt){
 	int ln = 1000;
-	for(int i = 0; i < 6; i++){
+	for(int i = 0; i < n; i++){
 		if(bc[i].co != 1 && bc[i].tong != 0){
 			if(bc[i].tong < ln){
 				vt = i;
@@ -59,7 +63,7 @@ void Duyet(BienLuu bc[6], int &vt){
 }
 
 // --- xuat ra lo trinh duong di ngan nhat tu mang BienLuu ---
-void LoTrinh(BienLuu a[6], int x, int y){
+void LoTrinh(int n, BienLuu a[6], int x, int y){
 	cout << endl << "do dai duong di ngan nhat: " << a[y].tong << endl;
 	cout << "lo trinh:  " << y;
 	while(y != x){
@@ -69,7 +73,7 @@ void LoTrinh(BienLuu a[6], int x, int y){
 }
 
 // --- ham tim duong di ngan nhat ---
-void TimDuong(int a[6][6]){
+void TimDuong(int n, int a[max][max]){
 	
 	BienLuu BC[6];
 	BienLuu BP;
@@ -77,14 +81,20 @@ void TimDuong(int a[6][6]){
 	BP.co = 0;
 	
 	// --- khoi tao hang dau tien ---
-	for(int i = 0; i < 6; i++){
+	for(int i = 0; i < n; i++){
 		BC[i].ten = 0;
 		BC[i].tong = 0;
 		BC[i].co = 0;
 	}
+	int bd, kt;
+	cout << "nhap diem bat dau: ";
+	cin >> bd;
+	cout << "nhap diem ket thuc ";
+	cin >> kt;
+	cout << endl;
 	
-	int x = 0;	// --- bi tri bat dau ---
-	int y = 5;	// --- vi tri ket thuc ---
+	int x = bd;	// --- bi tri bat dau ---
+	int y = kt;	// --- vi tri ket thuc ---
 	int i = x;	// --- bat dau doc ma tran tu hang x / vi tri bat dau tim duong ---
 	
 	// --- danh dau vi tri bat dau ---
@@ -92,7 +102,7 @@ void TimDuong(int a[6][6]){
 	
 	do{
 		
-		for(int j = 0; j < 6; j++){
+		for(int j = 0; j < n; j++){
 			
 			// --- gan cho bien phu ten va gia tri tong ---
 			if(a[i][j] != 0){
@@ -108,25 +118,26 @@ void TimDuong(int a[6][6]){
 		}
 		
 		// --- xuat ra qua trinh thay doi gia tri cua mang BC[] theo dong ---
-		for(int c = 0; c < 6; c++)
+		for(int c = 0; c < n; c++)
 			cout << BC[c].ten << "," << BC[c].tong << "\t";
 		cout << endl;
 		
-		Duyet(BC, x);	// --- danh dau vinh tri da di qua ---
+		Duyet(n ,BC, x);	// --- danh dau vinh tri da di qua ---
 		i = x;	// --- dua i den hang tiep theo de doc ma tran ---
 	}while(x != y);
 	
-	LoTrinh(BC, 0, 5);
+	LoTrinh(n, BC, bd, kt);
 }
 
 int main(){
-	int a[6][6];
+	int n;
+	int a[max][max];
 	
-	MoDoThi(a);
+	MoDoThi(n, a);
 	
-	XuatMaTran(a);
+	XuatMaTran(n ,a);
 	
 	cout << endl;
 	
-	TimDuong(a);
+	TimDuong(n, a);
 }
