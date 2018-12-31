@@ -63,13 +63,27 @@ void Duyet(int n, BienLuu bc[max], int &vt){
 }
 
 // --- xuat ra lo trinh duong di ngan nhat tu mang BienLuu ---
-void LoTrinh(int n, BienLuu a[6], int x, int y){
+void LoTrinh(int n, BienLuu a[max], int x, int y){
 	cout << endl << "do dai duong di ngan nhat: " << a[y].tong << endl;
 	cout << "lo trinh:  " << y;
 	while(y != x){
 		y = a[y].ten;
 		cout << " <-- " << y;
 	}
+}
+// --- luu ket qua vao file ---
+void LuuKQ(int n, BienLuu bc[max], int x, int y){
+	fstream f;
+	f.open("DU_LIEU/LUU_KET_QUA.txt", ios::out);
+	f << "diem bat dau: " << x << "\n";
+	f << "diem ket thuc: " << y << "\n";
+	f << "do dai duong di ngan nhat la: " << bc[y].tong << "\n";
+	f << "lo trinh:  " << "\t" << y;
+	while(y != x){
+		y = bc[y].ten;
+		f << " <-- " << y;
+	}
+	f.close();
 }
 
 // --- ham tim duong di ngan nhat ---
@@ -127,6 +141,7 @@ void TimDuong(int n, int a[max][max]){
 	}while(x != y);
 	
 	LoTrinh(n, BC, bd, kt);
+	LuuKQ(n, BC, bd, kt);
 }
 
 int main(){

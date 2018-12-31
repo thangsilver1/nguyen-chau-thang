@@ -1,0 +1,4 @@
+diem bat dau: 0
+diem ket thuc: 5
+do dai duong di ngan nhat la: 5
+lo trinh:  	5 <-- 2 <-- 0
