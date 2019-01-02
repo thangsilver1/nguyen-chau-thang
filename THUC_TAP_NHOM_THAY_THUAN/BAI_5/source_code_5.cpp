@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #define max 20
+
 using namespace std;
 
 struct PhanSo{
