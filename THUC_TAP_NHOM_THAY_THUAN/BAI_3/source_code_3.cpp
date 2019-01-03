@@ -4,6 +4,7 @@ using namespace std;
 
 struct AVL{
 	int gt;
+	int cb;
 	AVL *tr;
 	AVL *ph;
 };
@@ -15,8 +16,18 @@ void Tao(AVL *&goc){
 }
 
 // --- ham xac dinh yeu to can bang cua 1 nut ---
-int NutCanBang(){
-	
+int NutCanBang(AVL *goc){
+	if(goc->tr == NULL && goc->ph == NULL)
+		return 0;
+	else
+		if(goc->tr != NULL && goc->ph == NULL)
+			return 1 + NutCanBang(goc->tr);
+		else
+			if(goc->tr == NULL && goc->ph != NULL)
+				return 1 + NutCanBang(goc->ph);
+			else
+				if(goc->tr != NULL && goc->ph != NULL)
+					return (1 + NutCanBang(goc->tr)) - (1 + NutCanBang(goc->ph));
 }
 
 // --- moc 1 nut vao cay ---
@@ -38,7 +49,7 @@ void Moc(AVL *&goc, int x){
 void NhapCay(AVL *&goc){
 	int x;
 	do{
-		cout << "nhap gia tri: ";
+		cout << "nhap gia tri / nhap 0 de ket thuc nhap: ";
 		cin >> x;
 		if(x != 0)
 			Moc(goc, x);
@@ -49,9 +60,9 @@ void NhapCay(AVL *&goc){
 void XuatCay(AVL *goc){
 	if(goc != NULL){
 		XuatCay(goc->ph);
-		cout << "\t" << goc->gt;
+		cout << goc->gt << "\t";
 		XuatCay(goc->tr);
-	}	
+	}
 }
 
 // --- dem so la cua cay ---
@@ -124,12 +135,13 @@ int main(){
 	Tao(goc);
 	NhapCay(goc);
 	XuatCay(goc);
-
-	cout << endl << "so la cua cay: " << DemLa(goc);
-	cout << endl << "vi tri nut mang gia tri x: " << TimVT(goc, 6);
-	cout << endl << "chieu cao cay: " << ChieuCao(goc);
-	cout << endl << "so nut cua cay: " << DemNut(goc);
-	cout << endl << "cac gia tri tai muc i: ";
-	InMuc(goc, 3);
-	cout << endl << "tong cac gia tri tai muc i: " << TongMuc(goc, 3);
+	
+	cout << endl << NutCanBang(goc);
+//	cout << endl << "so la cua cay: " << DemLa(goc);
+//	cout << endl << "vi tri nut mang gia tri x: " << TimVT(goc, 6);
+//	cout << endl << "chieu cao cay: " << ChieuCao(goc);
+//	cout << endl << "so nut cua cay: " << DemNut(goc);
+//	cout << endl << "cac gia tri tai muc i: ";
+//	InMuc(goc, 3);
+//	cout << endl << "tong cac gia tri tai muc i: " << TongMuc(goc, 3);
 }
