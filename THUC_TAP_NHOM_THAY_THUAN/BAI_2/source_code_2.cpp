@@ -6,8 +6,8 @@ using namespace std;
 // --- tao cau truc cua van ba ---
 struct VB {
 	char nd[100];
-	VB *truoc;
 	VB *sau;
+	VB *truoc;
 };
 
 // --- khoi tao 1 van ban ---
@@ -103,20 +103,71 @@ void ChenCuoi(VB *dau){
 }
 
 // --- xoa dong thu i den dong thi j ---
-void XoaIJ(VB *dau, int i, int j){
-	VB *p, *q;
+void XoaIJ(VB *&dau, int i, int j){
+	VB *p, *q, *s;
 	if(KTIJ(dau, i, j) == 1){
 		while(i <= j){
-			dau = Dong(i);
-			p = dau->truoc;
-			q = dau->sau;
-			p->sau = q;
-			q->truoc = p;
-			j--;;
+			if(i == 1){
+				p = dau;
+				dau = dau->sau;
+				dau->truoc = NULL;
+				delete p;
+			}
+			else{
+				p = Dong(i);
+				if(p->sau == NULL){
+					q = p->truoc;
+					q->sau = NULL;
+					delete p;
+				}
+				else{
+					q = p->truoc;
+					s = p->sau;
+					q->sau = s;
+					s->truoc = q;
+					delete p;
+				}
+			}
+			j--;
 		}
 	}
 }
 
+// --- chep noi dung dong p vao sau dong q ---
+void ChepIK(VB *dau, VB *p, VB *q){
+	VB *s, *c;
+	
+	s = q->sau; // --- dong sau dong q ---
+	c = new VB; // --- tao moi 1 bien VB de sao chep ---
+	strcpy(c->nd, p->nd); // --- sao chep noi dung p vao noi dung c ---
+	q->sau = c;
+	c->truoc = q;
+	c->sau = s;
+	s->truoc = c;
+}
+
+// --- chep noi dung dong i den j vao sau dong k ---
+void ChepIJK(VB *dau, int i, int j, int k){
+	VB *p, *sp;
+	VB *dd[j-i+1];
+	
+	if(KTIJ(dau, i, j) == 1){
+		int dem = i;
+		
+		// --- dua vi tri cua dong i den dong j vao mang dd[] ---
+		for(int a = 0; a <= j-i; a++){
+			dd[a] = Dong(dem);
+			dem++;
+		}
+		
+		// --- lay vi tri dong i den j trong mang dd [] va chep vao vi tri sau k ---
+		for(int a = 0; a <= j-i; a++){
+			p = Dong(k);
+			ChepIK(dau, dd[a], p); // --- chep dd[] vao sau k ---
+			k++;
+		}
+	}
+}
 int main() {
 	
 	TaoVB(dau);
@@ -135,7 +186,12 @@ int main() {
 	HThi(dau);
 	
 // --- xoa va hien thi noi dung van ban	---
-	XoaIJ(dau, 2, 4);
+	XoaIJ(dau, 3, 5);
 	cout << endl << "noi dung van ban sau khi xoa:" << endl;
+	HThi(dau);
+	
+// --- 
+	ChepIJK(dau, 2, 4, 2);
+	cout << endl << "noi dung van ban sau khi chen i den j vao sau k:" << endl;
 	HThi(dau);
 }
