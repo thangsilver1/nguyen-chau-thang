@@ -1,0 +1,6 @@
+ket qua cong 2 ma tran:
+12 24 36 
+48 60 72 
+ket qua tru 2 ma tran:
+-10 -20 -30 
+-40 -50 -60 

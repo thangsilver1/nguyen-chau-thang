@@ -17,24 +17,52 @@ void NhapNut(AVL *&goc);   // --- nhap cay ---
 void XuatCay(AVL *goc);   // --- xuat cay ---
 int ChieuCao(AVL *nut);   // --- chieu cao cay tai 1 nut ---
 void NutCanBang(AVL *goc);   // --- ham xac dinh yeu to can bang cua 1 nut / gan cho nut luon ---
-void KiemTraCB(AVL *&goc);
+void KiemTraCB(AVL *&goc);   // --- kiem tra va hieu chinh cay sao cho can bang ---
+
 void XoayTrTr(AVL *&nut);   // --- hieu chinh trai trai---
 void XoayTrPh(AVL *&nut);   // --- hieu chinh trai phai ---
 void XoayPhPh(AVL *&nut);   // --- hieu chinh phai phai ---
 void XoayPhTr(AVL *&nut);   // --- hieu chinh phai trai ---
 void XuLyXoay(AVL *&nut);   // --- ham xu ly cac hieu chinh xoay ---
 
+void XoaDinh(AVL *&goc);   // --- xoa dinh cua cay ---
+void XoaNut(AVL *&goc, int x);   // --- xoa 1 nut co gia tri la x ---
 
+void AVLChua(AVL *goc, int &co);   // --- kiem tra 1 cay co phai la cay AVL ---
+
+// --- chuong trinh chinh ---
 int main(){
 
 	Tao(goc);
 	
 	NhapNut(goc);
 	
-//	NutCanBang(goc);
-	
+	cout << endl;
 	XuatCay(goc);
 	
+	cout << endl;
+	int co = 0;
+	AVLChua(goc, co);
+	if(co == 1)
+		cout << endl << "cay nay chua phai la cay AVL !!!";
+	else
+		cout << endl << "cay nay la cay AVL !!!";
+	
+	cout << endl;
+	int i;
+	cout << endl << "nhap gia tri can xoa: ";
+	cin >> i;
+	XoaNut(goc, i);
+	
+	cout << endl << "cay sau khi xoa la: " << endl;
+	NutCanBang(goc);
+	XuatCay(goc);
+	co = 0;
+	AVLChua(goc, co);
+	if(co == 1)
+		cout << endl << "cay nay chua phai la cay AVL !!!";
+	else
+		cout << endl << "cay nay la cay AVL !!!";
 }
 
 // --- cac ham xu ly ---
@@ -191,3 +219,62 @@ void XuLyXoay(AVL *&nut){
 	}
 }
 
+void XoaDinh(AVL *&goc){
+	AVL *a, *b, *c, *d;
+	a = goc;
+	b = goc->tr;
+	c = goc->ph;
+	if(b->ph == NULL){
+		b->ph = c;
+		goc = b;
+		delete a;
+	}
+	else{
+		d = b;
+		b = b->ph;
+		while(b->ph != NULL){
+			d = b;
+			b = b->ph;
+		}
+		if(b->tr == NULL){
+			b->ph = c;
+			b->tr = goc->tr;
+			d->ph = NULL;
+			goc = b;
+			delete a;
+		}
+		else{
+			d->ph = b->tr;
+			b->ph = c;
+			b->tr = goc->tr;
+			goc = b;
+			delete a;
+		}
+	}
+}
+
+void XoaNut(AVL *&goc, int x){
+	if(goc != NULL)
+		if(goc->gt == x){
+			if(goc->tr == NULL && goc->ph == NULL)
+				goc = NULL;
+			else
+				XoaDinh(goc);	
+		}
+		else
+			if(goc->gt >= x)
+				XoaNut(goc->tr, x);
+			else
+				XoaNut(goc->ph, x);
+}
+
+void AVLChua(AVL *goc, int &co){
+	if(goc != NULL){
+		if(goc->cb == 2 || goc->cb == -2)
+			co = 1;
+		else{
+			AVLChua(goc->tr, co);
+			AVLChua(goc->ph, co);
+		}
+	}
+}

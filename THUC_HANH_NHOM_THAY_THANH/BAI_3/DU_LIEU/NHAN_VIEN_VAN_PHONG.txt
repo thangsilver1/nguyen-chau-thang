@@ -1,0 +1,31 @@
+5
+nguyen van suu
+nam
+11/12/2016
+2
+2
+1
+tran van ti
+nam
+12/06/2015
+3
+1
+5
+phan thi dan
+nu
+13/02/2017
+1.5
+2
+0
+le van mao
+nam
+14/01/2018
+2
+0
+3
+tran thi ngo
+nu
+06/05/2010
+3
+2
+6

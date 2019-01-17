@@ -1,0 +1,9 @@
+thu tu cac xe can sua la:
+xe 5
+xe 1
+xe 3
+xe 4
+xe 2
+
+thu tu cac xe khong sua la:
+khong co
