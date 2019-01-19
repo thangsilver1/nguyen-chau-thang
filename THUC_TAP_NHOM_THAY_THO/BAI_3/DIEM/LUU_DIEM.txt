@@ -2,3 +2,4 @@ thang		0
 BIN		0
 THANGKURO		2
 SON		4
+gaaaaa		8
